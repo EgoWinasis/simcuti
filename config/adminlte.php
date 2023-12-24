@@ -307,11 +307,10 @@ return [
         ['header' => 'MENU CUTI'],
         [
             'text'        => 'Verifikasi Cuti',
-            'url'         => 'verif',
+            'url'         => 'verifikasi',
             'icon'        => 'far fa-check-circle',
-            'label'       => 4,
             'label_color' => 'success',
-            'can'  => 'isAdmin',
+            'can'         => ['isKepala','isAdmin'],
         ],
         [
             'text'        => 'Pengajuan Cuti',
@@ -337,6 +336,7 @@ return [
             'text'       => 'Cetak Data',
             'url'        => 'cetak',
             'icon'       => 'fas fa-fw fa-print',
+            
         ],
     ],
 

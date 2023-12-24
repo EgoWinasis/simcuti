@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Termwind\Components\Dd;
+
 
 class ProfileController extends Controller
 {
@@ -17,7 +17,7 @@ class ProfileController extends Controller
     public function index()
     {
         $profile = DB::table('users')
-            ->select('id', 'name', 'email', 'role','bagian','jabatan', 'image')
+            ->select('id','nip', 'name', 'email', 'role','bagian','pangkat','jabatan', 'image','ttd')
             ->where('id', '=', Auth::user()->id)
             ->get();
         return view('profile.profile_view')->with(compact('profile'));
@@ -66,9 +66,15 @@ class ProfileController extends Controller
         $user = User::find($id);
 
         $validatedData = $request->validate([
+            'nip' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
+            'bagian' => ['required', 'string', 'max:255'],
+            'pangkat' => ['required', 'string', 'max:255'],
+            'jabatan' => ['required', 'string', 'max:255'],
             // foto
             'image' => 'image|file|max:2048|mimes:png,jpg,jpeg|dimensions:max_width=300,max_height=300',
+            // ttd
+            'ttd' => 'image|file|max:2048|mimes:png,jpg,jpeg|dimensions:max_width=200,max_height=200',
         ]);
 
         
@@ -82,6 +88,18 @@ class ProfileController extends Controller
             $validatedData['image'] = $fileName;
         } else {
             $validatedData['image'] = $user['image'];
+        }
+        // ttd
+        if ($request->file('ttd')) {
+            if ($user['ttd'] != 'qrcode.png') {
+                Storage::delete('public/ttd/' . $user['ttd']);
+            }
+            $file = $request->file('ttd');
+            $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+            $request->file('ttd')->storeAs('public/ttd/', $fileName);
+            $validatedData['ttd'] = $fileName;
+        } else {
+            $validatedData['ttd'] = $user['ttd'];
         }
 
         User::where('id', $id)->update($validatedData);

@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\CetakController;
 use App\Http\Controllers\CutiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VerifikasiController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,10 +24,15 @@ use App\Http\Controllers\ProfileController;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // users
 Route::resource('user', UserController::class);
 // profile
 Route::resource('profile', ProfileController::class);
 // cuti
-Route::resource('cuti', CutiController::class);
+Route::group(['middleware' => 'profile.check'], function () {
+    // Routes that require profile check
+    Route::resource('cuti', CutiController::class);
+    Route::resource('verifikasi', VerifikasiController::class);
+    Route::resource('cetak', CetakController::class);
+    
+});

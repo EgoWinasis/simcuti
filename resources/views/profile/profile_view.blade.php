@@ -25,9 +25,20 @@
                     </div>
                     <div class="col-sm-8">
                         <x-adminlte-card title="Data Profile" theme="dark" icon="fas fa-lg fa-user">
-                            <div class="row p-2">
+                            <div class="row p-1">
                                 <div class="col-sm-3">
-                                    <h6>NAMA</h6>
+                                    <h6>NIP / NIPB</h6>
+                                </div>
+                                <div class="col-sm-1">
+                                    <h6>:</h6>
+                                </div>
+                                <div class="col-sm-8">
+                                    <h6>{{$profile[0]->nip}}</h6>
+                                </div>
+                            </div>
+                            <div class="row p-1">
+                                <div class="col-sm-3">
+                                    <h6>Nama</h6>
                                 </div>
                                 <div class="col-sm-1">
                                     <h6>:</h6>
@@ -36,9 +47,9 @@
                                     <h6>{{$profile[0]->name}}</h6>
                                 </div>
                             </div>
-                            <div class="row p-2">
+                            <div class="row p-1">
                                 <div class="col-sm-3">
-                                    <h6>EMAIL</h6>
+                                    <h6>Email</h6>
                                 </div>
                                 <div class="col-sm-1">
                                     <h6>:</h6>
@@ -47,7 +58,7 @@
                                     <h6>{{$profile[0]->email}}</h6>
                                 </div>
                             </div>
-                            <div class="row p-2">
+                            <div class="row p-1">
                                 <div class="col-sm-3">
                                     <h6>Bagian / Satuan</h6>
                                 </div>
@@ -58,7 +69,18 @@
                                     <h6>{{$profile[0]->bagian}}</h6>
                                 </div>
                             </div>
-                            <div class="row p-2">
+                            <div class="row p-1">
+                                <div class="col-sm-3">
+                                    <h6>Pangkat/Gol. Ruang</h6>
+                                </div>
+                                <div class="col-sm-1">
+                                    <h6>:</h6>
+                                </div>
+                                <div class="col-sm-8">
+                                    <h6>{{$profile[0]->pangkat}}</h6>
+                                </div>
+                            </div>
+                            <div class="row p-1">
                                 <div class="col-sm-3">
                                     <h6>Jabatan</h6>
                                 </div>
@@ -69,7 +91,19 @@
                                     <h6>{{$profile[0]->jabatan}}</h6>
                                 </div>
                             </div>
-                            <div class="row p-2 mt-2">
+                            <div class="row p-1">
+                                <div class="col-sm-3">
+                                    <h6>Tanda Tangan</h6>
+                                </div>
+                                <div class="col-sm-1">
+                                    <h6>:</h6>
+                                </div>
+                                <div class="col-sm-8">
+                                    <img src="{{asset('storage/ttd/'.$profile[0]->ttd)}}" alt="Tanda Tangan"
+                                    class="rounded mx-auto d-block">
+                                </div>
+                            </div>
+                            <div class="row p-1 mt-4">
 
                                 <div class="col-sm-4">
                                 </div>

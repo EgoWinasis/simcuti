@@ -1,8 +1,8 @@
 @extends('adminlte::page')
 
-@section('title','Pengajuan Cuti')
+@section('title','Verifikasi Cuti')
 @section('content_header')
-<h1>Pengajuan Cuti</h1>
+<h1>Verifikasi Cuti</h1>
 @stop
 
 @section('content')
@@ -10,23 +10,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-                @endif
-                @if ($message = Session::get('error'))
-                <div class="alert alert-danger">
-                    <p>{{ $message }}</p>
-                </div>
-                @endif
-                
-                <div class="row my-3">
-                    <div class="col-md-12">
-                        <x-adminlte-button onclick="return add();" label="Tambah" theme="primary" icon="fas fa-plus" />
-                    </div>
-
-                </div>
+               
                 <div class="row">
 
                     <div class="col-md-12">
@@ -36,9 +20,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Tanggal Pengajuan</th>
+                                    <th>Nama</th>
                                     <th>Jenis Cuti</th>
                                     <th>Tanggal Cuti</th>
-                                    <th>Jumlah</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -51,13 +35,13 @@
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $data->created_at }}</td>
+                                    <td class="nama">{{ $data->name }}</td>
                                     <td>{{ $data->jenis_cuti }}</td>
                                     <td>{{ $data->tgl_cuti }}</td>
-                                    <td>{{ $data->hari }} hari</td>
                                     <td>
                                         @php
                                         $dotColor = '';
-                                        switch ($data->status) {
+                                        switch ($data->status_admin) {
                                         case 'Pending':
                                         $dotColor = 'yellow';
                                         break;
@@ -77,7 +61,7 @@
                                         @endphp
                                         <span
                                             style="display: inline-block; height: 10px; width: 10px; border-radius: 50%; background-color: {{ $dotColor }}; margin-right: 5px;"></span>
-                                        {{ $data->status }}
+                                        {{ $data->status_admin }}
                                     </td>
                                     <td>
                                         {{-- <a class="btn btn-info" href="{{ route('cuti.show',$data->id) }}">Show</a>
@@ -85,8 +69,11 @@
 
                                         <button class="btn btn-info btn-show"
                                             data-id_show="{{ $data->id }}">Show</button>
-                                        @if (empty($data->deleted_at) && $data->status == 'Pending')
-                                        <a class="btn btn-danger btn-delete" data-id="{{$data->id}}">Batal</a>
+                                        @if (empty($data->deleted_at)  && $data->status_admin == 'Pending')
+                                        <a class="btn btn-danger btn-delete" data-id="{{$data->id}}">Tolak</a>
+                                        @endif
+                                        @if (empty($data->deleted_at) &&  $data->status_admin == 'Pending')
+                                        <a class="btn btn-success btn-setuju" data-id="{{$data->id}}">Teruskan</a>
                                         @endif
 
                                     </td>
@@ -130,7 +117,6 @@
                       "autoWidth": false,
                       "responsive": true,
                     })
-                   
                   });
                 
                   $(document).on('click', '.btn-delete', function (e) {
@@ -139,11 +125,11 @@
 
                     // Fetch CSRF token from the meta tag
                     var token = $('meta[name="csrf-token"]').attr('content');
-                    let url = "/cuti/" + id;
+                    let url = "/verifikasi/" + id;
 
                   
                     Swal.fire({
-                        title: 'Batalkan Permintaan ?',
+                        title: 'Tolak Permintaan ?',
                         type: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
@@ -162,7 +148,7 @@
                                 success: function (data) {
                                     console.log(data);
                                     Swal.fire({
-                                        title: 'Berhasil Dibatalkan!',
+                                        title: 'Berhasil Ditolak!',
                                         type: "success"
                                     }
                                     );
@@ -178,6 +164,52 @@
                             });
                         }
                     });
+
+                    
+                });
+
+                $(document).on('click', '.btn-setuju', function (e) {
+                    e.preventDefault();
+                    var id = $(this).data('id');
+                    var nama = $(this).parent().parent().find('.nama').text();
+                    var token = $("meta[name='csrf-token']").attr("content");
+                
+                    Swal.fire({
+                        title: 'Setujui Cuti '+nama+' ?',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes'
+                    }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                             type: "PUT",
+                             url: "/verifikasi/"+id,
+                             data: {
+                                 'id'     :id,
+                                 '_token' : token,
+                                 },
+                            success: function (data) {   
+                                Swal.fire(
+                                    'Berhasil!',
+                                    'Cuti '+nama+' berhasil disetujui!',
+                                    'success'
+                                    )
+                                    window.location.reload();
+                                 },
+                            error: function(xhr, status, error) {
+                                    Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: error
+                                    })
+                                 }      
+                            });
+                        
+                    }
+                    })
+                    
                 });
                 
             </script>
@@ -208,7 +240,7 @@
                                                 <td>${cuti[0].nip}</td>
                                             </tr>
                                             <tr>
-                                                <th>Nama</th>
+                                                <th>Name</th>
                                                 <td>:</td>
                                                 <td>${cuti[0].name}</td>
                                             </tr>
