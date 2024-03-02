@@ -13,9 +13,9 @@
                
                 <div class="row">
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 table-responsive">
 
-                        <table id="table_cuti" class="table table-bordered table-striped">
+                        <table id="table_cuti" class="table table-bordered table-striped ">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -104,8 +104,6 @@
                  }
                  $(function () {
                     $("#table_cuti").DataTable({
-                      "responsive": true, "lengthChange": false, "autoWidth": false,
-                    //   "buttons": ["excel", "pdf", "print"],
                       "paging": true,
                       "lengthChange": false,
                       "searching": true,

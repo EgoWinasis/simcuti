@@ -79,15 +79,14 @@
             <script type="text/javascript">
                 $(function () {
                     $("#table_siswa").DataTable({
-                      "responsive": true, "lengthChange": false, "autoWidth": false,
-                    //   "buttons": ["excel", "pdf", "print"],
                       "paging": true,
                       "lengthChange": false,
                       "searching": true,
                       "ordering": true,
                       "info": true,
-                      "autoWidth": false,
+                      "autoWidth": true,
                       "responsive": true,
+                      
                       "buttons": [
                             {
                                 extend: 'excelHtml5',

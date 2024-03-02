@@ -20,7 +20,7 @@
                     <p>{{ $message }}</p>
                 </div>
                 @endif
-                
+
                 <div class="row my-3">
                     <div class="col-md-12">
                         <x-adminlte-button onclick="return add();" label="Tambah" theme="primary" icon="fas fa-plus" />
@@ -30,72 +30,72 @@
                 <div class="row">
 
                     <div class="col-md-12">
+                        <div class="table-responsive">
 
-                        <table id="table_cuti" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Tanggal Pengajuan</th>
-                                    <th>Jenis Cuti</th>
-                                    <th>Tanggal Cuti</th>
-                                    <th>Jumlah</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                $i=1;
-                                @endphp
-                                @foreach ($cuti as $data)
-                                <tr>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ $data->created_at }}</td>
-                                    <td>{{ $data->jenis_cuti }}</td>
-                                    <td>{{ $data->tgl_cuti }}</td>
-                                    <td>{{ $data->hari }} hari</td>
-                                    <td>
-                                        @php
-                                        $dotColor = '';
-                                        switch ($data->status) {
-                                        case 'Pending':
-                                        $dotColor = 'yellow';
-                                        break;
-                                        case 'Batal':
-                                        $dotColor = 'red';
-                                        break;
-                                        case 'Ditolak':
-                                        $dotColor = 'red';
-                                        break;
-                                        case 'Disetujui':
-                                        $dotColor = 'green';
-                                        break;
-                                        default:
-                                        $dotColor = 'black'; // Default color
-                                        break;
-                                        }
-                                        @endphp
-                                        <span
-                                            style="display: inline-block; height: 10px; width: 10px; border-radius: 50%; background-color: {{ $dotColor }}; margin-right: 5px;"></span>
-                                        {{ $data->status }}
-                                    </td>
-                                    <td>
-                                        {{-- <a class="btn btn-info" href="{{ route('cuti.show',$data->id) }}">Show</a>
-                                        --}}
+                            <table id="table_cuti" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Tanggal Pengajuan</th>
+                                        <th>Jenis Cuti</th>
+                                        <th>Tanggal Cuti</th>
+                                        <th>Jumlah</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                    $i=1;
+                                    @endphp
+                                    @foreach ($cuti as $data)
+                                    <tr>
+                                        <td>{{ $i++ }}</td>
+                                        <td>{{ $data->created_at }}</td>
+                                        <td>{{ $data->jenis_cuti }}</td>
+                                        <td>{{ $data->tgl_cuti }}</td>
+                                        <td>{{ $data->hari }} hari</td>
+                                        <td>
+                                            @php
+                                            $dotColor = '';
+                                            switch ($data->status) {
+                                            case 'Pending':
+                                            $dotColor = 'yellow';
+                                            break;
+                                            case 'Batal':
+                                            $dotColor = 'red';
+                                            break;
+                                            case 'Ditolak':
+                                            $dotColor = 'red';
+                                            break;
+                                            case 'Disetujui':
+                                            $dotColor = 'green';
+                                            break;
+                                            default:
+                                            $dotColor = 'black'; // Default color
+                                            break;
+                                            }
+                                            @endphp
+                                            <span
+                                                style="display: inline-block; height: 10px; width: 10px; border-radius: 50%; background-color: {{ $dotColor }}; margin-right: 5px;"></span>
+                                            {{ $data->status }}
+                                        </td>
+                                        <td>
+                                         
+                                            <button class="btn btn-info btn-show"
+                                                data-id_show="{{ $data->id }}">Show</button>
+                                            @if (empty($data->deleted_at) && $data->status == 'Pending')
+                                            <a class="btn btn-danger btn-delete" data-id="{{$data->id}}">Batal</a>
+                                            @endif
 
-                                        <button class="btn btn-info btn-show"
-                                            data-id_show="{{ $data->id }}">Show</button>
-                                        @if (empty($data->deleted_at) && $data->status == 'Pending')
-                                        <a class="btn btn-danger btn-delete" data-id="{{$data->id}}">Batal</a>
-                                        @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
 
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
+                            </table>
 
-                        </table>
-
+                        </div>
 
                     </div>
                 </div>
