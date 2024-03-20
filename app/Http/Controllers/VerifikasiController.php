@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class VerifikasiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -89,14 +93,20 @@ class VerifikasiController extends Controller
     public function update(Request $request, string $id)
     {
         $cuti = ModelCuti::find($id); // Find the record by ID
-        if (Auth::user()->role == 'admin') {
-            $cuti->status_admin = "Disetujui";
+        if ($request->has('alasan') && !empty($request->alasan)) {
+            $cuti->alasan = $request->alasan;
             $cuti->save();
-        }
-        if (Auth::user()->role == 'kepala') {
-            $cuti->status = "Disetujui";
-            $cuti->approve_by = Auth::user()->name;
-            $cuti->save();
+        } else {
+            if (Auth::user()->role == 'admin') {
+                $cuti->status_admin = "Disetujui";
+                $cuti->save();
+            }
+
+            if (Auth::user()->role == 'kepala') {
+                $cuti->status = "Disetujui";
+                $cuti->approve_by = Auth::user()->name;
+                $cuti->save();
+            }
         }
     }
 
@@ -109,6 +119,7 @@ class VerifikasiController extends Controller
         if ($modelCuti) {
             if (Auth::user()->role == 'admin') {
                 $modelCuti->status_admin = 'Ditolak';
+                $modelCuti->status = 'Ditolak';
                 $modelCuti->save();
                 $modelCuti->delete();
             }

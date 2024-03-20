@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title','Kelola Profile')
+@section('title','Kelola Profil')
 @section('content_header')
 <h1>Kelola Profile</h1>
 @stop
@@ -18,13 +18,13 @@
                 <div class="row">
 
                     <div class="col-sm-4">
-                        <x-adminlte-card title="Foto Profile" theme="dark" icon="fas fa-lg fa-portrait">
+                        <x-adminlte-card title="Foto Profil" theme="dark" icon="fas fa-lg fa-portrait">
                             <img src="{{asset('storage/images/'.$profile[0]->image)}}" alt="foto profile"
                                 class="rounded mx-auto d-block">
                         </x-adminlte-card>
                     </div>
                     <div class="col-sm-8">
-                        <x-adminlte-card title="Data Profile" theme="dark" icon="fas fa-lg fa-user">
+                        <x-adminlte-card title="Data Profil" theme="dark" icon="fas fa-lg fa-user">
                             <div class="row p-1">
                                 <div class="col-sm-3">
                                     <h6>NIP / NIPB</h6>
@@ -108,8 +108,8 @@
                                 <div class="col-sm-4">
                                 </div>
                                 <div class="col-sm-4">
-                                    <a class="btn btn-primary" href="{{ route('profile.edit',$profile[0]->id) }}">Edit
-                                        Profile</a>
+                                    <a class="btn btn-primary" href="{{ route('profile.edit',$profile[0]->id) }}">Ubah 
+                                        Profil</a>
                                 </div>
                                 <div class="col-sm-4">
                                 </div>

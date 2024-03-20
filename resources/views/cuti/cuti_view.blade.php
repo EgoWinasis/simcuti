@@ -83,7 +83,7 @@
                                         <td>
                                          
                                             <button class="btn btn-info btn-show"
-                                                data-id_show="{{ $data->id }}">Show</button>
+                                                data-id_show="{{ $data->id }}">Lihat</button>
                                             @if (empty($data->deleted_at) && $data->status == 'Pending')
                                             <a class="btn btn-danger btn-delete" data-id="{{$data->id}}">Batal</a>
                                             @endif
@@ -146,9 +146,10 @@
                         title: 'Batalkan Permintaan ?',
                         type: 'warning',
                         showCancelButton: true,
+                        cancelButtonText: 'Batal',
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes'
+                        confirmButtonText: 'Ya'
                     }).then((result) => {
                 
                         if (result.value) {
@@ -160,7 +161,6 @@
                                     '_token': token
                                 },
                                 success: function (data) {
-                                    console.log(data);
                                     Swal.fire({
                                         title: 'Berhasil Dibatalkan!',
                                         type: "success"
@@ -199,7 +199,7 @@
                                     var cuti = data.cuti;
 
                                     Swal.fire({
-                                        title: 'Cuti Details',
+                                        title: 'Detail Cuti',
                                         html: `
                                         <table style="width:100%;text-align:left;">
                                             <tr>
@@ -258,7 +258,12 @@
                                                 <td>${cuti[0].status}</td>
                                             </tr>
                                             <tr>
-                                                <th>Approve By</th>
+                                                <th>Alasan</th>
+                                                <td>:</td>
+                                                <td>${cuti[0].alasan}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Disetujui Oleh</th>
                                                 <td>:</td>
                                                 <td>${cuti[0].approve_by}</td>
                                             </tr>

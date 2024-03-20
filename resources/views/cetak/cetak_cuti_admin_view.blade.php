@@ -72,7 +72,7 @@
                                             --}}
 
                                             <button class="btn btn-info btn-show"
-                                                data-id_show="{{ $data->id }}">Show</button>
+                                                data-id_show="{{ $data->id }}">Lihat</button>
 
                                         </td>
                                     </tr>
@@ -158,7 +158,7 @@
                                     var cuti = data.cuti;
 
                                     Swal.fire({
-                                        title: 'Cuti Details',
+                                        title: 'Detail Cuti',
                                         html: `
                                         <table style="width:100%;text-align:left;">
                                             <tr>
@@ -167,7 +167,7 @@
                                                 <td>${cuti[0].nip}</td>
                                             </tr>
                                             <tr>
-                                                <th>Name</th>
+                                                <th>Nama</th>
                                                 <td>:</td>
                                                 <td>${cuti[0].name}</td>
                                             </tr>
@@ -217,7 +217,7 @@
                                                 <td>${cuti[0].status}</td>
                                             </tr>
                                             <tr>
-                                                <th>Approve By</th>
+                                                <th>Disetujui Oleh</th>
                                                 <td>:</td>
                                                 <td>${cuti[0].approve_by}</td>
                                             </tr>

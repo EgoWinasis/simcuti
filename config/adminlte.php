@@ -300,7 +300,7 @@ return [
         // Sidebar items:
 
         [
-            'text'        => 'Dashboard',
+            'text'        => 'Beranda',
             'url'         => '/',
             'icon'        => 'fas fa-fw fa-home',
         ],
@@ -321,7 +321,7 @@ return [
         ],
         ['header' => 'PENGATURAN AKUN'],
         [
-            'text' => 'Profile',
+            'text' => 'Profil',
             'url'  => 'profile',
             'icon' => 'fas fa-fw fa-user',
         ],

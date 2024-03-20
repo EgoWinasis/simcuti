@@ -13,9 +13,9 @@
                
                 <div class="row">
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 table-responsive">
 
-                        <table id="table_cuti" class="table table-bordered table-striped table-responsive">
+                        <table id="table_cuti" class="table table-bordered table-striped ">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -70,7 +70,7 @@
                                         --}}
 
                                         <button class="btn btn-info btn-show"
-                                            data-id_show="{{ $data->id }}">Show</button>
+                                            data-id_show="{{ $data->id }}">Lihat</button>
                             
                                     </td>
                                 </tr>
@@ -155,7 +155,7 @@
                                     var cuti = data.cuti;
 
                                     Swal.fire({
-                                        title: 'Cuti Details',
+                                        title: 'Detail Cuti',
                                         html: `
                                         <table style="width:100%;text-align:left;">
                                             <tr>
@@ -164,7 +164,7 @@
                                                 <td>${cuti[0].nip}</td>
                                             </tr>
                                             <tr>
-                                                <th>Name</th>
+                                                <th>Nama</th>
                                                 <td>:</td>
                                                 <td>${cuti[0].name}</td>
                                             </tr>
@@ -214,7 +214,7 @@
                                                 <td>${cuti[0].status}</td>
                                             </tr>
                                             <tr>
-                                                <th>Approve By</th>
+                                                <th>Disetujui Oleh</th>
                                                 <td>:</td>
                                                 <td>${cuti[0].approve_by}</td>
                                             </tr>

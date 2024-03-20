@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -104,7 +108,7 @@ class ProfileController extends Controller
 
         User::where('id', $id)->update($validatedData);
         return redirect()->route('profile.index')
-        ->with('success', 'Berhasil Update Profile');
+        ->with('success', 'Berhasil Memperbarui Profil');
     }
 
     /**

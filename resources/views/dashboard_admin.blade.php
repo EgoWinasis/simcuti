@@ -4,12 +4,12 @@
             <div class="card-body d-flex align-items-center">
                 <i class="fas fa-users fa-2x mr-3"></i> <!-- Icon -->
                 <div>
-                    <div class="text-white lead">Users Aktif</div>
+                    <div class="text-white lead">Pengguna Aktif</div>
                     <div class="text-white lead">{{$totalUsersActive}} Akun</div> <!-- Numeric value -->
                 </div>
             </div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="{{route('user.index')}}">View Details</a>
+                <a class="small text-white stretched-link" href="{{route('user.index')}}">Lihat Detail</a>
                 <div class="small text-white">
                     <i class="fas fa-angle-right"></i>
                 </div>
@@ -22,12 +22,12 @@
             <div class="card-body d-flex align-items-center">
                 <i class="fas fa-users-slash fa-2x mr-3"></i> <!-- Icon -->
                 <div>
-                    <div class="text-white lead">User Non Aktif</div>
+                    <div class="text-white lead">Pengguna Tidak Aktif</div>
                     <div class="text-white lead">{{$totalUsersInActive}} Akun</div> <!-- Numeric value -->
                 </div>
             </div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="{{route('user.index')}}">View Details</a>
+                <a class="small text-white stretched-link" href="{{route('user.index')}}">Lihat Detail</a>
                 <div class="small text-white">
                     <i class="fas fa-angle-right"></i>
                 </div>
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="{{route('cuti.index')}}">View Details</a>
+                <a class="small text-white stretched-link" href="{{route('cuti.index')}}">Lihat Detail</a>
                 <div class="small text-white">
                     <i class="fas fa-angle-right"></i>
                 </div>
@@ -59,12 +59,12 @@
             <div class="card-body d-flex align-items-center">
                 <i class="fas fa-sync-alt fa-2x mr-3"></i> <!-- Icon -->
                 <div>
-                    <div class="text-white lead">Pending</div>
+                    <div class="text-white lead">Ditunda</div>
                     <div class="text-white lead">{{$pendingCount}} Permintaan</div> <!-- Numeric value -->
                 </div>
             </div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="{{route('cuti.index')}}">View Details</a>
+                <a class="small text-white stretched-link" href="{{route('cuti.index')}}">Lihat Detail</a>
                 <div class="small text-white">
                     <i class="fas fa-angle-right"></i>
                 </div>
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="{{route('cuti.index')}}">View Details</a>
+                <a class="small text-white stretched-link" href="{{route('cuti.index')}}">Lihat Detail</a>
                 <div class="small text-white">
                     <i class="fas fa-angle-right"></i>
                 </div>
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="{{route('cuti.index')}}">View Details</a>
+                <a class="small text-white stretched-link" href="{{route('cuti.index')}}">Lihat Detail</a>
                 <div class="small text-white">
                     <i class="fas fa-angle-right"></i>
                 </div>

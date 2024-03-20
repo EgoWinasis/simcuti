@@ -12,6 +12,10 @@ use Carbon\Carbon;
 
 class CetakController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -108,17 +112,19 @@ class CetakController extends Controller
                 // Extracting start and end dates
                 $dates = explode(' to ', $row->tgl_cuti);
             }
-            if (count($dates) === 2) {
-                $startDate = Carbon::createFromFormat('Y-m-d', $dates[0]);
-                $endDate = Carbon::createFromFormat('Y-m-d', $dates[1]);
+            if (isset($dates)) {
+                if (count($dates) === 2) {
+                    $startDate = Carbon::createFromFormat('Y-m-d', $dates[0]);
+                    $endDate = Carbon::createFromFormat('Y-m-d', $dates[1]);
 
-                // Set the locale to Indonesian
-                Carbon::setLocale('id');
+                    // Set the locale to Indonesian
+                    Carbon::setLocale('id');
 
-                // Format the start and end dates in Indonesian format
-                $startDateIndo = $startDate->isoFormat('D MMMM Y');
-                $endDateIndo = $endDate->isoFormat('D MMMM Y');
-                $tagCuti = " Dengan ini mengajukan Cuti Tahunan selama <b>$hari hari</b> terhitung mulai tanggal <b>$startDateIndo</b> s/d <b>$endDateIndo</b> dan selama menjalankan cuti tahunan alamat berada di <b>$alamat_cuti</b>";
+                    // Format the start and end dates in Indonesian format
+                    $startDateIndo = $startDate->isoFormat('D MMMM Y');
+                    $endDateIndo = $endDate->isoFormat('D MMMM Y');
+                    $tagCuti = " Dengan ini mengajukan Cuti Tahunan selama <b>$hari hari</b> terhitung mulai tanggal <b>$startDateIndo</b> s/d <b>$endDateIndo</b> dan selama menjalankan cuti tahunan alamat berada di <b>$alamat_cuti</b>";
+                }
             } else {
                 $startDate = Carbon::createFromFormat('Y-m-d', $row->tgl_cuti);
                 Carbon::setLocale('id');
@@ -162,6 +168,30 @@ class CetakController extends Controller
             $nipAtasan = $row->nip;
             $bagianAtasan = strtoupper($row->bagian);
             $ttdAtasan = $row->ttd;
+        }
+        switch ($bagianAtasan) {
+            case 'SEKSI PELAYANAN KEPERAWATAN':
+                $textBagian = "KASI PELAYANAN KEPERAWATAN";
+                break;
+            case 'SUB BAGIAN UMUM DAN KEPEGAWAIAN':
+                $textBagian = "KASUBBAG UMUM DAN KEPEGAWAIAN";
+                break;
+            case 'SUB BAGIAN PERENCANAAN DAN KEUANGAN':
+                $textBagian = "KASUBBAG PERENCANAAN DAN KEUANGAN";
+                break;
+            case 'SEKSI PELAYANAN MEDIS':
+                $textBagian = "KASI PELAYANAN MEDIS";
+                break;
+            case 'SEKSI PELAYANAN PENUNJANG MEDIS':
+                $textBagian = "KASI PELAYANAN PENUNJANG MEDIS";
+                break;
+            case 'SEKSI PELAYANAN PENUNJANG NON MEDIS':
+                $textBagian = "KASI PELAYANAN PENUNJANG NON MEDIS";
+                break;
+
+            default:
+                $textBagian = "";
+                break;
         }
         // sisa cuti
 
@@ -333,7 +363,7 @@ class CetakController extends Controller
                         CATATAN PEJABAT KEPEGAWAIAN <br> cuti yang akan diambil tahun ini <br>adalah :
                     </td>
                     <td width='60%' style='text-align: center; padding-top: 5px; '>
-                        CATATAN PERTIMBANGAN ATASAN LANGSUNG <br> $bagianAtasan <br> RSUD SURADADI KABUPATEN TEGAL
+                        CATATAN PERTIMBANGAN ATASAN LANGSUNG <br> $textBagian <br>RSUD SURADADI KABUPATEN TEGAL
                     </td>
                 </tr>
                 <tr>

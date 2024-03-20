@@ -1,8 +1,8 @@
 @extends('adminlte::page')
 
-@section('title','Kelola Profile')
+@section('title','Kelola Profil')
 @section('content_header')
-<h1>Edit Profile</h1>
+<h1>Ubah Profil</h1>
 @stop
 
 @section('content')
@@ -26,11 +26,11 @@
                     <div class="row">
                         <div class="col-sm-2"></div>
                         <div class="col-sm-8">
-                            <x-adminlte-card title="Edit Profile" theme="dark" icon="fas fa-lg fa-portrait">
+                            <x-adminlte-card title="Ubah Profil" theme="dark" icon="fas fa-lg fa-portrait">
                                 <img id="image_profile" src="{{asset('storage/images/'.$profile[0]->image)}}"
                                     alt="foto profile" class="rounded mx-auto d-block mt-2">
-                                <x-adminlte-input-file id="imgInp" name="image" label="Foto Profile"
-                                    placeholder="Choose a file...">
+                                <x-adminlte-input-file id="imgInp" name="image" label="Foto Profil"
+                                    placeholder="Unggah Gambar...">
                                     <x-slot name="prependSlot">
                                         <div class="input-group-text bg-lightblue">
                                             <i class="fas fa-upload"></i>
@@ -42,8 +42,13 @@
                                 <x-adminlte-input name="name" label="Nama" placeholder="Nama"
                                     value="{{old('name') ? old('name') : $profile[0]->name }}" />
                                 @php
-                                $options = ['-'=>'-','Pelayanan Umum dan Kepegawaian' => 'Pelayanan Umum dan
-                                Kepegawaian', 'Keperawatan' => 'Keperawatan'];
+                                $options = [
+                                    'Sub Bagian Perencanaan dan Keuangaan'=>'Sub Bagian Perencanaan dan Keuangaan',
+                                    'Seksi Pelayanan Medis' => 'Seksi Pelayanan Medis', 
+                                    'Sub Bagian Umum dan Kepegawaian' => 'Sub Bagian Umum dan Kepegawaian',
+                                    'Seksi Pelayanan Keperawatan' => 'Seksi Pelayanan Keperawatan', 
+                                    'Seksi Pelayanan Penunjang Medis' => 'Seksi Pelayanan Penunjang Medis', 
+                                    'Seksi Pelayanan Penunjang Non Medis' => 'Seksi Pelayanan Penunjang Non Medis']; 
                                 if (!empty(old('bagian'))) {
                                 $selected = [old('bagian')];
                                 }else{
@@ -60,7 +65,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <x-adminlte-input-file id="imgInpTtd" label="Tanda Tangan" name="ttd"
-                                            placeholder="Choose a file...">
+                                            placeholder="Unggah Gambar...">
                                             <x-slot name="prependSlot">
                                                 <div class="input-group-text bg-lightblue">
                                                     <i class="fas fa-upload"></i>
@@ -76,7 +81,7 @@
 
                                 <div class="row p-4">
                                     <div class="col-sm-12 text-center">
-                                        <x-adminlte-button class="btn-flat col-sm-4" type="submit" label="Save Profile"
+                                        <x-adminlte-button class="btn-flat col-sm-4" type="submit" label="Simpan"
                                             theme="success" icon="fas fa-lg fa-save" />
                                     </div>
                                 </div>

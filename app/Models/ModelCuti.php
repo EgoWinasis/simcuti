@@ -20,11 +20,12 @@ class ModelCuti extends Model
         'pangkat',
         'jabatan',
         'jenis_cuti',
-        'tgl_cuti',
+        'tgl_cuti', 
         'hari',
         'alamat_cuti',
         'status',
         'status_admin',
+        'alasan',
         'approve_by',
         // Add other fields that you want to be fillable here
     ];

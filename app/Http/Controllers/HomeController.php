@@ -81,20 +81,24 @@ class HomeController extends Controller
         if (Auth::user()->role == 'kepala') {
             
             $batalCount = DB::table('cuti')
-                ->where('approve_by', '=', Auth::user()->name)
+                ->where('bagian', '=', Auth::user()->bagian)
                 ->where('status', '=', 'Batal')
+                ->where('alasan', '=', '-')
                 ->count();
             $pendingCount = DB::table('cuti')
-                ->where('approve_by', '=', Auth::user()->name)
+                ->where('bagian', '=', Auth::user()->bagian)
                 ->where('status', '=', 'Pending')
+                ->where('alasan', '=', '-')
                 ->count();
             $disetujuiCount = DB::table('cuti')
-                ->where('approve_by', '=', Auth::user()->name)
+                ->where('bagian', '=', Auth::user()->bagian)
                 ->where('status', '=', 'Disetujui')
+                ->where('alasan', '=', '-')
                 ->count();
             $ditolakCount = DB::table('cuti')
-                ->where('approve_by', '=', Auth::user()->name)
+                ->where('bagian', '=', Auth::user()->bagian)
                 ->where('status', '=', 'Ditolak')
+                ->where('status_admin', '=', 'Disetujui')
                 ->count();
 
             return view('home', compact('batalCount', 'disetujuiCount','pendingCount', 'ditolakCount'));

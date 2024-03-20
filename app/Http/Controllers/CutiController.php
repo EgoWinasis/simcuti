@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class CutiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -84,6 +88,9 @@ class CutiController extends Controller
             'tgl_cuti' => ['required', 'string', 'max:255'],
             'alamat_cuti' => ['required', 'string', 'max:255'],
 
+        ], [
+            'required' => 'Kolom :attribute harus diisi.',
+            'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
         ]);
 
         if (strpos($validatedData['tgl_cuti'], ' to ') !== false) {

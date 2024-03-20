@@ -27,11 +27,11 @@ class UserController extends Controller
         }
         $users = DB::table('users')
             ->select('id', 'name', 'email', 'role', 'image', 'isActive')
-            ->whereNull('deleted_at') 
+            ->whereNull('deleted_at')
             ->orderBy('id')
             ->get();
 
-        return view('user.user_view')->with(compact('users'));;
+        return view('user.user_view')->with(compact('users'));
     }
 
     /**
@@ -72,8 +72,13 @@ class UserController extends Controller
     {
         $user = User::find($id); // Find the record by ID
 
-        // Update the isActive field to 1
-        $user->isActive = 1;
+        if (isset($request->role)) {
+            // Update the role
+            $user->role = $request->role;
+        } else {
+            // Update the isActive field to 1
+            $user->isActive = 1;
+        }
 
         // Save the changes to the database
         $user->save();
