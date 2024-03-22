@@ -321,6 +321,11 @@ return [
         ],
         ['header' => 'PENGATURAN AKUN'],
         [
+            'text' => 'Ubah Kata Sandi',
+            'url'  => 'password',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+        [
             'text' => 'Profil',
             'url'  => 'profile',
             'icon' => 'fas fa-fw fa-user',
@@ -380,23 +385,23 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
             ],
         ],
         'DatatablesPlugins' => [
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',
@@ -441,11 +446,11 @@ return [
             ],
         ],
         'BsCustomFileInput' => [
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => true,
+                    'asset' => false,
                     'location' => 'vendor/bs-custom-file-input/bs-custom-file-input.min.js',
                 ],
             ],

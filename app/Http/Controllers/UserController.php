@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -39,7 +39,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('auth.register');
     }
 
     /**
@@ -47,7 +47,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'required' => 'Kolom :attribute harus diisi.',
+            'max' => 'Kolom :attribute tidak boleh lebih dari :max karakter.',
+            'min' => 'Kolom :attribute tidak boleh kurang dari :min karakter.',
+            'confirmed' => 'Kolom :attribute Kata Sandi tidak sama.',
+            'unique' => 'Kolom :attribute email sudah digunakan',
+        ]);
+
+        User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+        ]);
+        return redirect()->route('user.index')->with('success', 'Akun Berhasil Dibuat');
     }
 
     /**
@@ -63,6 +80,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+       
     }
 
     /**

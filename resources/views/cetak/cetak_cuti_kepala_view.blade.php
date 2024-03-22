@@ -93,7 +93,8 @@
             @stop
 
             @section('plugins.Datatables', true)
-            @section('plugins.DatatablesPlugin', true)
+            @section('plugins.DatatablesPlugins', true)
+
             @section('plugins.Sweetalert2', true)
 
             @section('js')

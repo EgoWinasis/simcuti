@@ -15,6 +15,11 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
+                    <div class="row my-3">
+                        <div class="col-md-12">
+                            <x-adminlte-button onclick="return add();" label="Buat Akun" theme="primary" icon="fas fa-plus" />
+                        </div>
+                    </div>
                     <div class="row">
 
                         <div class="col-md-12">
@@ -75,11 +80,15 @@
             @stop
 
             @section('plugins.Datatables', true)
-            @section('plugins.DatatablesPlugin', true)
+            @section('plugins.DatatablesPlugins', true)
             @section('plugins.Sweetalert2', true)
 
             @section('js')
+            
                 <script type="text/javascript">
+                    function add() {
+                        window.location = "{{ route('user.create') }}";
+                    }
                     $(function() {
                         $("#table_siswa").DataTable({
                             "paging": true,
@@ -215,9 +224,10 @@
                         var token = $("meta[name='csrf-token']").attr("content");
 
                         Swal.fire({
-                            title: 'Aktivasi user ' + nama + ' ?',
+                            title: 'Aktivasi pengguna ' + nama + ' ?',
                             type: 'warning',
                             showCancelButton: true,
+                            cancelButtonText: 'Batal',
                             confirmButtonColor: '#3085d6',
                             cancelButtonColor: '#d33',
                             confirmButtonText: 'Yes'

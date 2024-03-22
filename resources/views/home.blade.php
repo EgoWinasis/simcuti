@@ -1,8 +1,8 @@
 @extends('adminlte::page')
 
-@section('title','Dashboard')
+@section('title','Beranda')
 @section('content_header')
-<h1>Dashboard</h1>
+<h1>Beranda</h1>
 <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
 @stop
 
